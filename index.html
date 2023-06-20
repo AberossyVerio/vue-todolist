@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+	<link rel="stylesheet" href="styles.css">
+	<title>To Do
+		 List</title>
+</head>
+<body>
+	<div id="todolist" class="container card mx-auto px-3 my-3" style="width: 800px;">
+		<div class="d-flex flex-column">
+			<h1 class="my-3">To-dos</h1>
+
+			<div>
+				<form @submit.prevent="newTodo" class="d-flex flex-row">
+					<input type="text" name="todo" placeholder="New to-do" class="form-control">
+					<input type="submit" value="✔" class="btn btn-outline-secondary">
+				</form>
+			</div>
+
+			<div class="card px-3 py-2 my-3">
+				<div v-for="list in lists" :class="{done : list.status}">
+						<label class="card-title d-flex flex-row gap-2">
+							<input type="checkbox" 
+								id="status"
+								:checked="list.status" 
+								@change="list.status = !list.status"
+								class="btn btn-outline-primary">
+								<div>
+									{{ list.todo }} 
+								</div>
+						</label>
+				</div>
+			</div>
+			<p>Done ({{ todosDone }})</p>
+		</div>
+	</div>
+
+	<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+	<script>
+		Vue.createApp({
+			data(){
+				return {
+					lists : [
+						{
+							id: 1,
+							todo : 'Belajar Vue JS',
+							status: false
+						},
+						{
+							id: 2,
+							todo : 'Belajar React JS',
+							status: true
+						},
+						{
+							id: 3,
+							todo : 'Belajar Angular JS',
+							status: true
+						},
+						{
+							id: 4,
+							todo : 'Belajar Express JS',
+							status : false
+						}
+
+					]
+				}
+			},
+			methods : {
+				newTodo(event){
+					let todo = event.target.elements.todo.value
+
+					this.lists.push({
+						id : this.lists.length + 1,
+						todo : todo,
+						status : false
+					})
+				}
+			},
+			computed: {
+				todosDone(){
+					return this.lists.filter((list) => list.status == true).length
+				}
+			},
+		}).mount('#todolist')
+	</script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+	<script type="module">
+		// Import the functions you need from the SDKs you need
+		import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+		// TODO: Add SDKs for Firebase products that you want to use
+		// https://firebase.google.com/docs/web/setup#available-libraries
+	  
+		// Your web app's Firebase configuration
+		const firebaseConfig = {
+		  apiKey: "AIzaSyBJcNnCg2JHeLAW-ysI6kBVcp_-wtrpGkM",
+		  authDomain: "vue-todolist-bb05f.firebaseapp.com",
+		  projectId: "vue-todolist-bb05f",
+		  storageBucket: "vue-todolist-bb05f.appspot.com",
+		  messagingSenderId: "970462403149",
+		  appId: "1:970462403149:web:d839682c71d136da455a04"
+		};
+	  
+		// Initialize Firebase
+		const app = initializeApp(firebaseConfig);
+	  </script>
+</body>
+</html>
