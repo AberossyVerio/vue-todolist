@@ -23,6 +23,7 @@
 <script>
 import Todoitem from "./Todoitem.vue";
 import { ref, reactive, toRefs, onMounted, computed } from "vue";
+
 export default {
   components: { Todoitem },
   setup() {
@@ -77,3 +78,50 @@ export default {
   },
 };
 </script>
+
+<!-- <script setup>
+  import Todoitem from "./Todoitem.vue";
+  import {ref, reactive, onMounted, computed, toRefs} from "vue";
+
+  const todo = ref("");
+  const todos = reactive({
+    list: [],
+  });
+
+  onMounted(() => {
+      const items = localStorage.getItem("todos");
+      todos.list = items ? JSON.parse(items) : [];
+  });
+
+  const totalTODO = computed(() => {
+      return todos.list.filter((list) => list.isDone == true).length;
+  });
+
+  function add(){
+
+    todos.list.unshift({
+      activity: todo.value,
+      isDone: false,
+    })
+
+    todo.value = "";
+    saveToLocalStorage();
+  }
+
+  function doneTodo(todoIndex){
+    todos.list = todos.list.filter((item, index) => {
+
+      if (index == todoIndex) {
+        item.isDone = !item.isDone;
+      }
+
+      return item;
+    });
+
+    saveToLocalStorage();
+  }
+
+  function saveToLocalStorage(){
+    localStorage.setItem("todos", JSON.stringify(todos.list));
+  }
+</script> -->
