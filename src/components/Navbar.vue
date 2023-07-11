@@ -1,16 +1,7 @@
 <template>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary ">
-        <div class="container-fluid">
-        <a class="navbar-brand" href="#">Vue</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-            <a class="nav-link active" aria-current="page" href="#">Todolist</a>
-            <a class="nav-link active" href="#">About</a>
-            </div>
-        </div>
-        </div>
+    <nav class="d-flex flex-row justify-content-center gap-2 ">
+        <router-link to="/about" class="nav-link fs-2">About</router-link>
+        <span class="fs-2">|</span>
+        <router-link to="/todo" class="nav-link fs-2">Todolist</router-link>
     </nav>
 </template>

@@ -26,7 +26,7 @@
   </div>
 </template>
   
-  <script>
+<script>
   export default {
     props: {
       todos: {
@@ -46,5 +46,5 @@
       return { deleteTODO, done };
     },
   };
-  </script>
+</script>
   
